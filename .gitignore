@@ -1,0 +1,9 @@
+bback.bat
+services/target/
+frontend-client/package.json
+services/GamerNet/.mvn
+services/GamerNet/src/test
+services/GamerNet/src/main/resources
+services/GamerNet/Dockerfile
+.vscode
+docker-compose.yaml
