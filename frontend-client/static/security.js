@@ -45,11 +45,15 @@ function SecurityConfig()
             let refreshToken = this.getRefreshToken();
 
             // check if access token has expired
+            /*
             console.log((new Date().getTime() / 1000) +" "+accessToken.exp);
-            if(Math.floor((new Date().getTime() / 1000)) >= accessToken.exp)
+            console.log(localStorage.access_token)
+            console.log(localStorage.refresh_token)
+            */
+            if(Math.floor((new Date().getTime() / 1000)) > accessToken.exp)
             {
                 // check if refresh token has expired
-                if(Math.floor((new Date().getTime() / 1000)) >= refreshToken.exp)
+                if(Math.floor((new Date().getTime() / 1000)) > refreshToken.exp)
                 {
                     cancelFlow();
                     return;
@@ -66,6 +70,14 @@ function SecurityConfig()
 
                 console.log(result);
 
+           
+
+                if(result?.access_token == undefined) // to check if the post request failed, for any reason. 
+                {
+                    cancelFlow();
+                    return;
+                }
+
                 localStorage.setItem('access_token', result.access_token);
                 localStorage.setItem('expires_in', result.expires_in);
                 localStorage.setItem('refresh_token', result.refresh_token);
@@ -73,7 +85,7 @@ function SecurityConfig()
                 localStorage.setItem('id_token', result.id_token);
                 localStorage.setItem('session_state', result.session_state);
                 localStorage.setItem('token_type', result.token_type);
-
+                localStorage.setItem('DEBUG FLAG', 'LOL')
 
                 console.log('Token Refreshed Successfully');
 

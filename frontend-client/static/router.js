@@ -2,6 +2,7 @@
 import abstractView from "./views/abstractView.js";
 import homeView from "./views/homeView.js";
 import notFoundView from "./views/notFoundView.js";
+import profileView from "./views/profileView.js";
 import timeLine from "./views/timeLine.js";
 import welcomeView from "./views/welcomeView.js";
 
@@ -37,7 +38,7 @@ async function router()
     [
         {path : '/welcome', view: welcomeView},
         {path : '/', view: homeView},
-        {path : '/profile', view: homeView},
+        {path : '/profile', view: profileView},
         {path : '/timeline', view: timeLine},
         {path:'/not-found', view: notFoundView}
     ];
@@ -90,10 +91,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         {
             e.preventDefault();
             navigateTo(e.target.href);
+            console.log("Does this ever work?")
+            await config.initFlow();
         }
 
-        console.log("Does this ever work?")
-        await config.initFlow();
+        
     });
     router();
 });

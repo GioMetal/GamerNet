@@ -22,6 +22,14 @@ function elementOut(i, links)
 
 function elementClick(i, links)
 {
+    if(links[i].pathname == location.pathname)
+    {
+        selectedLink = i;
+    }
+    else
+    {
+        selectedLink = undefined;
+    }
     selectedLink = i;
     links[i].style = 'text-decoration:none;color:orange;';
     for(let j = 0; j < links.length; j++)
@@ -171,57 +179,15 @@ async function render()
     document.querySelector('.navbar-logout').onclick = () => config.logOut();
     document.querySelector('.navbar-login').onclick = () => {config.initFlow()};
 
-    let links = document.querySelectorAll('.asd'); 
+    let links = document.querySelectorAll('.asd'); // get all our links from html
     for(let i = 0; i < links.length; i++)
     {
         links[i].onclick = () =>{elementClick(i, links)};
         links[i].onmouseover = () =>{elementHover(i, links)};
         links[i].onmouseout = () =>{elementOut(i, links)};
-        //console.log(links[i].pathname + ' ' + location.pathname);
         if(links[i].pathname == location.pathname)
         {
             elementClick(i, links);
         }
     }
-
-    
-    
-
-    /*
-
-    let html = 
-    `<nav class="main-nav">
-    <ul>
-        <li><h1>GamerNet</h1></li>
-        <li><a href="/" router>HOME</a></li>
-        <li><a href="/profile" router>PROFILE</a></li>
-        <li><button class="btn-bello-lo" `+ logFlagIn+ `>Log In</button></li>
-        <li><button class="btn-bello-li" `+logFlagOut+`>Log Out</button></li>
-    </ul>
-    </nav>`;
-
-    let baseCss = `<style>
-    .btn-bello-li, .btn-bello-lo
-    {
-        background-color:purple;
-        color:white;
-        margin-left: 64px;
-    border: 0;
-
-    padding: 16px;
-    }
-
-    .btn-bello-li:hover, .btn-bello-lo:hover
-    {
-        cursor:pointer;
-        background-color:white;
-        color:black;
-    }
-    </style>`;
-
-    */
-
-    //document.querySelector('#app-navbar').innerHTML = baseCss + html;
-    //document.querySelector('.btn-bello-li').onclick = () => config.logOut();
-    //document.querySelector('.btn-bello-lo').onclick = () => config.initFlow();
 }

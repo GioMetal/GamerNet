@@ -8,17 +8,23 @@ export default class extends abstractView
     constructor(params)
     {
         super(params);
-        this.setTitle('MiaLib - Home')
+        this.setTitle('MiaLib - Time Line')
         
     }
 
     async getHtml()
     {  
+        let showLogOut = config.getAccessToken() ? true : false;
+        let ac = config.getAccessToken();
+        console.log(this.params[1]);
+        let promise = await fetch("http://localhost:8081/api/v1/user/"+this.params[1], {method:'GET', mode:'cors',  headers:{'Sec-Fetch-Site': 'cross-site', 'Authorization': 'Bearer '+ config.getAuthToken(), 'Content-Type': 'application/json'}})
+        let result = await promise.text();
+
         let html =
         `
             <div class="home-body">
-                <h1 id="big-title">Benvenuti su GamerNet</h1>
-                <h3>In lavorazione...</h3>
+                <h1 id="big-title">`+result+`</h1>
+                
             </div>
         `;
 

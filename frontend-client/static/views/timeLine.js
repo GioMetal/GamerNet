@@ -17,7 +17,7 @@ export default class extends abstractView
         let showLogOut = config.getAccessToken() ? true : false;
         let ac = config.getAccessToken();
 
-        let promise = await fetch("http://localhost:8081/api/v1/user/membri", {method:'GET', mode:'cors',  headers:{'Sec-Fetch-Site': 'cross-site', 'Authorization': 'Bearer '+ config.getAuthToken(), 'Content-Type': 'application/json'}})
+        let promise = await fetch("http://localhost:8081/api/v1/timeline", {method:'GET', mode:'cors',  headers:{'Sec-Fetch-Site': 'cross-site', 'Authorization': 'Bearer '+ config.getAuthToken(), 'Content-Type': 'application/json'}})
         let result = await promise.text();
 
         let html =
