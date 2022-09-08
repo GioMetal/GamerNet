@@ -1,15 +1,9 @@
 package com.nullsoft.GamerNet.userprofile;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.nullsoft.GamerNet.GamerNetApplication;
 
@@ -21,9 +15,9 @@ public class UserProfileController {
 
 
     @GetMapping(path = "{id}")
-    public ResponseEntity<String> firstTimeLogin()
+    public ResponseEntity<String> testTesto()
     {
-        return ResponseEntity.status(HttpStatus.OK).body("Va cacaci a minchia");
+        return ResponseEntity.status(HttpStatus.OK).body("Security works");
     }
 
     @GetMapping(path = "membri")

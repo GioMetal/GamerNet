@@ -1,7 +1,5 @@
 package com.nullsoft.GamerNet.userprofile;
 
-import java.lang.reflect.Array;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
