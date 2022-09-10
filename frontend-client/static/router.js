@@ -10,7 +10,6 @@ export {navigateTo};
 
 function navigateTo(url)
 {
-    //console.log(url);
     history.pushState(null, null, url);
     router();
 }
@@ -82,7 +81,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     else
     {
-        
         await config.initFlow();
     }
 
@@ -91,7 +89,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         {
             e.preventDefault();
             navigateTo(e.target.href);
-            console.log("Does this ever work?")
             await config.initFlow();
         }
 

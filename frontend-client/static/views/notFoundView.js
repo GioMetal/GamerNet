@@ -5,7 +5,7 @@ export default class extends abstractView
     constructor(params, href)
     {
         super(params, href);
-        this.setTitle('MiaLib - 404 NON TROVATO')
+        this.setTitle('GamerNet - 404 NON TROVATO')
     }
 
     getHtml()

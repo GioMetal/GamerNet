@@ -8,7 +8,8 @@ export default class extends abstractView
     constructor(params)
     {
         super(params);
-        this.setTitle('MiaLib - Time Line')
+        let ac = config.getAccessToken();
+        this.setTitle('GamerNet - ' + ac.preferred_username)
         
     }
 

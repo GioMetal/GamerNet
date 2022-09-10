@@ -8,8 +8,7 @@ export default class extends abstractView
     constructor(params)
     {
         super(params);
-        this.setTitle('MiaLib - Home')
-        
+        this.setTitle('GamerNet - Home')
     }
 
     async getHtml()

@@ -14,6 +14,15 @@ import com.nimbusds.jose.shaded.json.JSONObject;
 @SpringBootApplication
 public class GamerNetApplication {
 
+	public static String GetMyName()
+	{
+		SecurityContext context = SecurityContextHolder.getContext();
+		Jwt j = (Jwt)context.getAuthentication().getPrincipal();
+		HashMap<String, Object> map = new HashMap<>(j.getClaims());
+
+		return map.get("preferred_username").toString();
+	}
+	
 	// returns true if the id matches the user's jwt
 	public static Boolean IsMe(String id) 
 	{
