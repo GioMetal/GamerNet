@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,26 +25,14 @@ public class UserProfileController
     }
 
     @GetMapping(path = "/{id}")
-
     public ResponseEntity<UserProfile> getUserProfile(@PathVariable(name = "id") String id)
     {
         return userProfileService.getUserProfile(id);
     }
-}
 
-/*
-@GetMapping(path = "/{id}")
-public ResponseEntity<String> getUserProfile(@PathVariable(name = "id") String id)
-{   
-    
-    if(GamerNetApplication.IsMe(id))
+    @PutMapping(path = "/{id}") 
+    public ResponseEntity<String> updateUserProfile(@PathVariable(name="id") String id, @RequestBody() UserProfile body)
     {
-        return ResponseEntity.status(HttpStatus.OK).body("Questo è il tuo profilo!");
+        return userProfileService.updateUserProfile(id, body);
     }
-    else
-    {
-        return ResponseEntity.status(HttpStatus.OK).body("Questo NON è il tuo profilo!");
-    }
-    
 }
-*/

@@ -37,6 +37,7 @@ public class GamerNetApplication {
 
 		return false;
 	}
+	
 
 	public static Boolean HasRole(String role)
 	{

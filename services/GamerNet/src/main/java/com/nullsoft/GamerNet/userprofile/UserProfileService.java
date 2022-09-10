@@ -50,4 +50,17 @@ public class UserProfileService
             }
         }
     }
+
+    public ResponseEntity<String> updateUserProfile(String id, UserProfile body)
+    {
+        if(GamerNetApplication.IsMe(id)) // safety first ;)
+        {
+            userProfileRepository.updateUser(id, body.username, body.about, body.sex);
+            return ResponseEntity.status(HttpStatus.OK).body("OK");
+        }
+        else
+        {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Non puoi modificare profili altrui! ^^");
+        }
+    }
 }

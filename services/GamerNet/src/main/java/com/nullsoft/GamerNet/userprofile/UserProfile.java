@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "userprofile")
@@ -41,6 +40,14 @@ public class UserProfile
         this.id = id;
         this.id_user = id_user;
         this.username = username;
+    }
+
+    public UserProfile(Long id, String username,String about, Boolean sex)
+    {
+        this.id = id;
+        this.username = username;
+        this.about = about;
+        this.sex = sex;
     }
 
     public UserProfile(Long id, String id_user, String username, String about, Boolean sex)

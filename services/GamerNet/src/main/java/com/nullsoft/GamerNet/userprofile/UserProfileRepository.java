@@ -17,4 +17,10 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, Long>
     @Modifying
     @Query(value = "INSERT INTO UserProfile(id, id_user, username) VALUES (nextval('userprofile_sequence'), :id_user, :username)", nativeQuery = true)
     public void createBlankProfile(@Param("id_user") String id, @Param("username") String username);
+
+    @Transactional
+    @Modifying
+    @Query(value="UPDATE UserProfile SET username=:username, about=:about, sex=:sex WHERE id_user = :id",
+    nativeQuery =  true)
+    public void updateUser(@Param("id") String id, @Param("username") String username, @Param("about") String about, @Param("sex") Boolean sex);
 }
