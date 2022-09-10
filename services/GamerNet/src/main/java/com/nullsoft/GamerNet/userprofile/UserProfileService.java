@@ -18,22 +18,23 @@ public class UserProfileService
         this.userProfileRepository = userProfileRepository;
     }
 
-    public ResponseEntity<String> getUserProfile(String id)
+    public ResponseEntity<UserProfile> getUserProfile(String id)
     {
         UserProfile pf = userProfileRepository.getProfile(id);
 
+        // checks if it's me
         if(GamerNetApplication.IsMe(id))
         {
             // if found send profile, otherwhise create it
             if(pf != null)
             {
-                return ResponseEntity.status(HttpStatus.OK).body(pf.username);
+                return ResponseEntity.status(HttpStatus.OK).body(pf);
             }
             else
             {
                 userProfileRepository.createBlankProfile(id, GamerNetApplication.GetMyName());
                 pf = userProfileRepository.getProfile(id);
-                return ResponseEntity.status(HttpStatus.CREATED).body(pf.username);
+                return ResponseEntity.status(HttpStatus.OK).body(pf);
             }
         }
         else
@@ -41,11 +42,11 @@ public class UserProfileService
             // if found send profile, otherwhise returns 404
             if(pf != null)
             {
-                return ResponseEntity.status(HttpStatus.OK).body(pf.username);
+                return ResponseEntity.status(HttpStatus.OK).body(pf);
             }
             else
             {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("NOT FOUND");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
             }
         }
     }

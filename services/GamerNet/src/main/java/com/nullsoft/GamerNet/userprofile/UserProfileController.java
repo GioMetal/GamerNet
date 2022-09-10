@@ -24,7 +24,7 @@ public class UserProfileController
 
     @GetMapping(path = "/{id}")
 
-    public ResponseEntity<String> getUserProfile(@PathVariable(name = "id") String id)
+    public ResponseEntity<UserProfile> getUserProfile(@PathVariable(name = "id") String id)
     {
         return userProfileService.getUserProfile(id);
     }

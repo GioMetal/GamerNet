@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface UserProfileRepository extends JpaRepository<UserProfile, Long>
 {
-    @Query(value = "SELECT new UserProfile(u.id, u.id_user, u.username) FROM UserProfile u WHERE u.id_user IS ?1")
+    @Query(value = "SELECT new UserProfile(u.id, u.id_user, u.username, u.about, u.sex) FROM UserProfile u WHERE u.id_user IS ?1")
     public UserProfile getProfile(@Param("id") String id);
 
     @Transactional
