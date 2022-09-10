@@ -8,14 +8,19 @@ export default class extends abstractView
         this.setTitle('MiaLib - Benvenuti');
     }
 
+    init()
+    {
+
+    }
+
     getHtml()
     {
-        this.baseHtml = 
+        let html = 
         `<img src="userimgs/asd.bmp" alt="">
         <h1>Accedi (potrai anche registrarti qualora tu non l'abbia ancora fatto!)"</h1>
         <button class="logInBtn">Log In</button>`;
 
-        this.baseCss = 
+        let css = 
         `<style>
         body
         {
@@ -24,7 +29,7 @@ export default class extends abstractView
         </style>`;
 
 
-        document.querySelector('#app').innerHTML = this.baseCss + this.baseHtml;
+        document.querySelector('#app').innerHTML = css + html;
         document.querySelector('.logInBtn').onclick = () => {config.initFlow()};
     }
 }

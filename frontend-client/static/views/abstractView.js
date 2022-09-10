@@ -4,10 +4,9 @@ export default class
     constructor(params, href)
     {
         this.params = params;
-        this.baseHtml = "";
-        this.baseCss = "";
         this.href = href;
 
+        this.init();
         this.refresh();
     }
 
@@ -33,8 +32,6 @@ export default class
 
     async refresh()
     {
-        this.baseHtml = "";
-        this.baseCss = "";
         document.querySelector('#app').innerHTML = '';
         await this.getHtml();
     }

@@ -14,6 +14,11 @@ export default class extends abstractView
         
     }
 
+    init()
+    {
+        
+    }
+
     async getHtml()
     {  
         curLimit = 10;

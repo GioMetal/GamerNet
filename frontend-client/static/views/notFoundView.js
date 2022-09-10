@@ -8,6 +8,11 @@ export default class extends abstractView
         this.setTitle('GamerNet - 404 NON TROVATO')
     }
 
+    init()
+    {
+        
+    }
+
     getHtml()
     {
         document.querySelector('#app').innerHTML = "404 NOT FOUND";

@@ -11,6 +11,11 @@ export default class extends abstractView
         this.setTitle('GamerNet - Home')
     }
 
+    init()
+    {
+
+    }
+
     async getHtml()
     {  
         let html =
