@@ -19,7 +19,14 @@ public class TimeLineController {
     public ResponseEntity<String> getTimeLineHistory(@RequestParam(name = "limit") Long limit,
         @RequestParam(name = "page") Long page)
     {   
-        return ResponseEntity.status(HttpStatus.OK).body("FAVOLOSO");
+        if(GamerNetApplication.HasRole("usa"))
+        {
+            return ResponseEntity.status(HttpStatus.OK).body("FAVOLOSO");
+        }
+        else
+        {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("NON HAI I RUOLI ZI");
+        }
     }
 
     @GetMapping(path = "/entry/{id}")

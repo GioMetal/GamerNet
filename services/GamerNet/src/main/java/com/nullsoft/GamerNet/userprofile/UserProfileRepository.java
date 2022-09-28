@@ -22,5 +22,5 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, Long>
     @Modifying
     @Query(value="UPDATE UserProfile SET username=:username, about=:about, sex=:sex WHERE id_user = :id",
     nativeQuery =  true)
-    public void updateUser(@Param("id") String id, @Param("username") String username, @Param("about") String about, @Param("sex") Boolean sex);
+    public void updateUser(@Param("id") String id, @Param("username") String username, @Param("about") String about, @Param("sex") Integer sex);
 }

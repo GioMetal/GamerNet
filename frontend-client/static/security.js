@@ -29,6 +29,46 @@ function SecurityConfig()
         startedHandShake = localStorage.getItem('startedHandShake') != null ? true : false;
     }
 
+    this.doRefreshToken = async function()
+    {
+        let refreshToken = this.getRefreshToken();
+        if(Math.floor((new Date().getTime() / 1000)) > refreshToken.exp)
+        {
+            cancelFlow();
+            return;
+        }
+        
+        // if refresh token is valid, we will request a new token
+        let bod = 
+            "client_id=gamer-net-front&"+
+            "client_secret=" + this.client_secret + "&"+
+            "refresh_token=" + localStorage.getItem('refresh_token') + "&"+
+            "grant_type=refresh_token";
+        let promise = await fetch('http://localhost:8080/realms/GamerNet/protocol/openid-connect/token',{method: 'POST',body: bod, headers: {'Content-Type': 'application/x-www-form-urlencoded'}});
+        let result = await promise.json();
+
+        console.log(result);
+
+    
+
+        if(result?.access_token == undefined) // to check if the post request failed, for any reason. 
+        {
+            cancelFlow();
+            return;
+        }
+
+        localStorage.setItem('access_token', result.access_token);
+        localStorage.setItem('expires_in', result.expires_in);
+        localStorage.setItem('refresh_token', result.refresh_token);
+        localStorage.setItem('refresh_expires_in', result.refresh_expires_in);
+        localStorage.setItem('id_token', result.id_token);
+        localStorage.setItem('session_state', result.session_state);
+        localStorage.setItem('token_type', result.token_type);
+        localStorage.setItem('DEBUG FLAG', 'LOL')
+
+        console.log('Token Refreshed Successfully');
+    }
+
     // login flow, you can call this afterwards to start the validation process
     this.initFlow = async function()
     {
@@ -42,7 +82,7 @@ function SecurityConfig()
         {
             // validation
             let accessToken = this.getAccessToken();
-            let refreshToken = this.getRefreshToken();
+            
 
             // check if access token has expired
             /*
@@ -53,43 +93,9 @@ function SecurityConfig()
             if(Math.floor((new Date().getTime() / 1000)) > accessToken.exp)
             {
                 // check if refresh token has expired
-                if(Math.floor((new Date().getTime() / 1000)) > refreshToken.exp)
-                {
-                    cancelFlow();
-                    return;
-                }
                 
-                // if refresh token is valid, we will request a new token
-                let bod = 
-                    "client_id=gamer-net-front&"+
-                    "client_secret=" + this.client_secret + "&"+
-                    "refresh_token=" + localStorage.getItem('refresh_token') + "&"+
-                    "grant_type=refresh_token";
-                let promise = await fetch('http://localhost:8080/realms/GamerNet/protocol/openid-connect/token',{method: 'POST',body: bod, headers: {'Content-Type': 'application/x-www-form-urlencoded'}});
-                let result = await promise.json();
-
-                console.log(result);
-
-           
-
-                if(result?.access_token == undefined) // to check if the post request failed, for any reason. 
-                {
-                    cancelFlow();
-                    return;
-                }
-
-                localStorage.setItem('access_token', result.access_token);
-                localStorage.setItem('expires_in', result.expires_in);
-                localStorage.setItem('refresh_token', result.refresh_token);
-                localStorage.setItem('refresh_expires_in', result.refresh_expires_in);
-                localStorage.setItem('id_token', result.id_token);
-                localStorage.setItem('session_state', result.session_state);
-                localStorage.setItem('token_type', result.token_type);
-                localStorage.setItem('DEBUG FLAG', 'LOL')
-
-                console.log('Token Refreshed Successfully');
-
-                location.href=location.href;
+                this.doRefreshToken();
+                //location.href=location.href;
                 return;
             }
         }
